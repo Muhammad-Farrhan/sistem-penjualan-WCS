@@ -11,7 +11,6 @@ Aplikasi web buat catat penjualan barang. Bisa kelola produk, bikin transaksi, t
 - Riwayat penjualan lengkap dengan detail
 - Hapus transaksi, stoknya balik lagi ke semula
 - Pencarian produk dan riwayat
-- Tampilan responsif, di HP juga masih enak dilihat
 
 ## Tampilan
 
