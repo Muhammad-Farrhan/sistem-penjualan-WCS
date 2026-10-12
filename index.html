@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Penjualan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">SP</div>
+      <div class="brand-text">
+        <span class="brand-name">Salespoint</span>
+        <span class="brand-sub">Inventory &amp; Sales</span>
+      </div>
+    </div>
+
+    <nav class="side-nav">
+      <span class="nav-label">Menu</span>
+      <button class="nav-btn active" data-tab="produk">
+        <span class="nav-icon">◈</span>
+        <span>Produk</span>
+      </button>
+      <button class="nav-btn" data-tab="transaksi">
+        <span class="nav-icon">◉</span>
+        <span>Transaksi</span>
+      </button>
+      <button class="nav-btn" data-tab="riwayat">
+        <span class="nav-icon">▤</span>
+        <span>Riwayat</span>
+      </button>
+    </nav>
+
+    <div class="side-foot">
+      <span class="dot"></span>
+      <span>Data lokal aktif</span>
+    </div>
+  </aside>
+
+  <div class="content">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title" id="pageTitle">Manajemen Produk</h1>
+        <p class="page-sub" id="pageSub">Kelola daftar barang dan stok tersedia</p>
+      </div>
+      <div class="topbar-right">
+        <div class="user-chip">
+          <div class="user-avatar">A</div>
+          <div class="user-meta">
+            <span class="user-name">Admin</span>
+            <span class="user-role">Kasir</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <section id="tab-produk" class="tab-page">
+        <div class="toolbar">
+          <div class="search">
+            <span class="search-icon">⌕</span>
+            <input id="searchProduk" placeholder="Cari nama atau ID produk">
+          </div>
+          <button class="btn btn-primary" id="btnTambahProduk">
+            <span class="btn-icon">+</span> Tambah Produk
+          </button>
+        </div>
+
+        <div class="card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama Produk</th>
+                <th class="num">Harga</th>
+                <th class="num">Stok</th>
+                <th class="act">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tblProduk"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-transaksi" class="tab-page hidden">
+        <div class="card">
+          <div class="card-head">
+            <h2>Header Penjualan</h2>
+          </div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID Penjualan</label>
+                <input id="trxIdPenjualan" readonly>
+              </div>
+              <div class="form-group">
+                <label>Tanggal</label>
+                <input id="trxTanggal" type="date">
+              </div>
+              <div class="form-group">
+                <label>ID Pelanggan</label>
+                <input id="trxPelanggan" placeholder="CUST-001">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>Detail Barang</h2>
+            <button class="btn btn-ghost btn-sm" id="btnTambahBaris">+ Tambah Baris</button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th class="num">Qty</th>
+                <th class="num">Harga Satuan</th>
+                <th class="num">Subtotal</th>
+                <th class="act">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tblDetail"></tbody>
+          </table>
+          <div class="card-foot">
+            <span class="foot-label">Total Pembayaran</span>
+            <span class="foot-value" id="trxTotal">Rp 0</span>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <button class="btn btn-secondary" id="btnResetTrx">Reset Form</button>
+          <button class="btn btn-primary" id="btnSimpanTrx">Simpan Penjualan</button>
+        </div>
+      </section>
+
+      <section id="tab-riwayat" class="tab-page hidden">
+        <div class="toolbar">
+          <div class="search">
+            <span class="search-icon">⌕</span>
+            <input id="searchRiwayat" placeholder="Cari ID penjualan atau pelanggan">
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID Penjualan</th>
+                <th>Tanggal</th>
+                <th>Pelanggan</th>
+                <th class="num">Total</th>
+                <th class="act">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tblRiwayat"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalProduk">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalProdukTitle">Tambah Produk</h3>
+      <button class="modal-close" data-close="modalProduk">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>ID Produk</label>
+        <input id="pId" readonly>
+      </div>
+      <div class="form-group">
+        <label>Nama Produk</label>
+        <input id="pNama" placeholder="Contoh: Indomie Goreng">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Harga</label>
+          <input id="pHarga" type="number" min="0" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label>Stok</label>
+          <input id="pStok" type="number" min="0" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="btnBatalProduk">Batal</button>
+      <button class="btn btn-primary" id="btnSimpanProduk">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalViewTrx">
+  <div class="modal modal-lg">
+    <div class="modal-head">
+      <h3>Detail Penjualan</h3>
+      <button class="modal-close" data-close="modalViewTrx">✕</button>
+    </div>
+    <div class="modal-body" id="viewTrxContent"></div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="btnTutupViewTrx">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/db.js"></script>
+<script src="js/produk.js"></script>
+<script src="js/transaksi.js"></script>
+<script src="js/riwayat.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
