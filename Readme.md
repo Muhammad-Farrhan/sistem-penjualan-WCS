@@ -2,7 +2,6 @@
 
 Aplikasi web buat catat penjualan barang. Bisa kelola produk, bikin transaksi, terus lihat riwayatnya. Semua jalan di browser, data disimpan di localStorage.
 
-Awalnya saya bikin ini buat latihan, tapi ternyata lumayan kepake buat toko kecil yang butuh pencatatan sederhana tanpa harus install aplikasi berat.
 
 ## Fitur
 
