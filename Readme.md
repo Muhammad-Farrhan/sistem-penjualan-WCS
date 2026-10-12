@@ -37,5 +37,5 @@ Detail Penjualan
 Nggak perlu install apa-apa. Clone, terus buka.
 
 ```bash
-git clone https://github.com/username/sistem-penjualan.git
-cd sistem-penjualan
+git clone https://github.com/username/sistem-penjualan-WCS.git
+cd sistem-penjualan-WCS
